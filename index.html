@@ -156,7 +156,7 @@
 
     /* ─── HERO ─── */
     .hero {
-      position: relative; min-height: 100vh;
+      position: relative; min-height: 1200px; max-height: 1200px;
       display: flex; flex-direction: column;
       align-items: center; justify-content: flex-start;
       text-align: center; padding: 100px 20px 60px;
@@ -185,14 +185,14 @@
       line-height: 1;
       letter-spacing: 0;
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 48px;
       white-space: nowrap;
     }
     .hero h1 .accent { color: var(--purple-light); }
     .hero-sub {
       font-size: 48px;
       color: #ffffff;
-      margin-bottom: 32px;
+      margin-bottom: 48px;
       font-weight: 400;
       line-height: 1;
       letter-spacing: 0;
@@ -202,7 +202,7 @@
     .hero-sub2 {
       font-size: 24px;
       color: #C2A1FF;
-      margin-bottom: 87px;
+      margin-bottom: 68px;
       font-weight: 700;
       line-height: 1;
       letter-spacing: 0;
@@ -224,6 +224,7 @@
       backdrop-filter: blur(14.1px);
       box-shadow: 0px 7px 18.4px 0px #C084FC47;
       margin-bottom: 12px;
+      margin-top: -4px;
       white-space: nowrap;
     }
     .btn-waitlist:hover { opacity: 0.9; transform: translateY(-1px); }
@@ -418,6 +419,10 @@
     .partners-row { display: flex; align-items: center; justify-content: center; gap: 160px; padding: 0 80px; }
     .partner-name { color: var(--text-muted); font-weight: 700; font-size: 16px; letter-spacing: 0.03em; opacity: 0.6; transition: opacity 0.2s; }
     .partner-name:hover { opacity: 1; }
+    .partners-track-wrapper { overflow: hidden; width: 100%; }
+    .partners-track { display: flex; align-items: center; gap: 160px; width: max-content; animation: scroll-partners 30s linear infinite; }
+    .partners-track:hover { animation-play-state: paused; }
+    @keyframes scroll-partners { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ─── ARBITRAGE ENGINE HERO ─── */
     .arb-hero { padding: 0px 40px 80px; text-align: center; position: relative; overflow: hidden; }
@@ -433,6 +438,7 @@
     .email-form input::placeholder { color: var(--text-dim); }
     .email-form button { background: var(--purple); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background 0.2s; display: flex; align-items: center; gap: 6px; }
     .email-form button:hover { background: var(--purple-light); }
+    #arb-form-row input { padding-top: 0 !important; padding-bottom: 0 !important; height: 100% !important; margin: 0 !important; vertical-align: middle !important; }
     .form-note { color: var(--text-dim); font-size: 12px; }
 
     /* ─── THE GAP ─── */
@@ -452,6 +458,7 @@
     .fragmented { position: relative; overflow: hidden; }
     .fragmented::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 120px; background: linear-gradient(to bottom, #000000 0%, transparent 100%); z-index: 2; pointer-events: none; }
     .fragmented::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 150px; background: linear-gradient(to top, #000000 0%, transparent 100%); z-index: 2; pointer-events: none; }
+    #fragmented-overlay { z-index: 5 !important; }
 
     /* ─── FEATURES TABS ─── */
     .features { position: relative; padding: 60px 140px; }
@@ -470,9 +477,10 @@
     .feature-header { max-width: 781px; }
     .feature-header h2 { font-family: var(--font-body); font-size: 56px; font-weight: 900; line-height: 100%; color: #ffffff; margin-bottom: 16px; }
     .feature-header p { font-family: var(--font-display); font-size: 24px; font-weight: 400; line-height: 36px; color: rgba(255,255,255,0.66); }
+    .features > div:first-child { align-items: center !important; margin-top: 80px !important; }
 
     /* ─── REWARDS ─── */
-    .rewards { padding: 100px 140px; }
+    .rewards { padding: 60px 140px; }
     .section-title { font-family: var(--font-display); font-size: clamp(28px, 4vw, 48px); font-weight: 800; margin-bottom: 16px; }
     .section-sub { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 60px; }
     .rewards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 900px; margin: 0 auto; }
@@ -481,6 +489,7 @@
     .reward-card h3 { color: var(--purple-bright); font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 16px; }
     .reward-card p { color: var(--text-muted); font-size: 13px; line-height: 1.7; }
     .reward-card p span { color: var(--purple-bright); font-weight: 600; }
+    .rewards .desk-only { padding: 0 60px; }
 
     /* ─── STEPS ─── */
     .steps { padding: 40px 40px 180px; }
@@ -539,7 +548,105 @@
     .mob-hero-images { display: none; }
     .mob-only { display: none; }
 
+    @keyframes flyToCoin {
+      0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+      40%  { transform: translate(calc(var(--tx)*0.4px), calc(var(--ty)*0.4px + 30px)) scale(0.9); opacity: 1; }
+      70%  { transform: translate(calc(var(--tx)*0.7px), calc(var(--ty)*0.7px - 20px)) scale(0.6); opacity: 0.7; }
+      100% { transform: translate(calc(var(--tx)*1px), calc(var(--ty)*1px)) scale(0); opacity: 0; }
+    }
+    @keyframes fadeInRow {
+      0%   { opacity: 0; transform: translateX(-10px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    .arb-data-row { opacity: 0; }
+    .arb-section-label { opacity: 0; }
+    .arb-card-right { opacity: 0; }
+
+
     /* ─── RESPONSIVE ─── */
+
+    @media (min-width: 1025px) and (max-width: 1920px) {
+      .hero { min-height: 1000px !important; max-height: 1000px !important; }
+      .desk-gap-cover { display: block !important; }
+      .hero-sub { font-size: 36px; font-weight: 700; }
+      .float-label.congress { right: auto !important; left:4vw !important; }
+      .float-label.sp { right: auto !important; left:24vw !important; }
+      .float-label.hype { right: auto !important; left:34vw !important; }
+      .coin-btc { right: auto !important; left: 13vw !important; }
+      .coin-eth { right: auto !important; left: 25vw !important; }
+      .arb-card { right: auto !important; left: 63vw !important; transform: scale(0.75); transform-origin: top left; }
+      .coin-4c { right: 50% !important; left: 50% !important; }
+      .gap-section { justify-content: space-between !important; gap: 100px !important; }
+      .gap-right { max-width: 390px !important; flex-shrink: 0 !important; }
+      .gap-left { margin-left: -20px !important; }
+      .gap-left h2 { font-size: 96px !important; }
+      .gap-right h3 { font-size: 34px !important; line-height: 1.3 !important; }
+      .gap-right p { font-size: 16px !important; line-height: 1.5 !important; }
+      #fragmented-title1, #fragmented-title2 { font-size: 72px !important; }
+      #fragmented-desc { font-size: 18px !important; line-height: 1.5 !important; }
+      #fragmented-stats > div > div:first-child { font-size: 96px !important; }
+      #fragmented-stats > div > div:last-child { font-size: 18px !important; }
+      .features { padding: 40px 80px !important; margin-top: 0px !important; }
+      .features > div:first-child { align-items: center !important; margin-top: 80px !important; }
+      .tabs-nav { padding: 20px 24px !important; gap: 24px !important; }
+      .tab-btn { font-size: 14px !important; }
+      .feature-header { max-width: 500px !important; }
+      #feature-title { font-size: 38px !important; margin-bottom: 12px !important; }
+      #feature-desc { font-size: 14px !important; line-height: 1.2 !important; }
+      .tab-btn.active::after { bottom: -20px !important; }
+      .steps > div { margin-top: -13vw !important; }
+      .steps { padding-bottom: 80px !important; }
+    }
+
+    @media (min-width: 769px) and (max-width: 1240px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none !important; }
+      .nav-actions { display: none !important; }
+      .mob-nav-icons { display: flex !important; align-items: center; gap: 8px; }
+      .hero { min-height: 820px !important; max-height: 1000px !important; }
+      .desk-gap-cover { display: block !important; }
+      .hero-sub { font-size: 32px; font-weight: 700; }
+      .float-label.congress { right: auto !important; left:4vw !important; }
+      .float-label.sp { right: auto !important; left:24vw !important; }
+      .float-label.hype { right: auto !important; left:34vw !important; }
+      .float-labels, .float-label, .coin, .arb-card { display: none !important; }
+      .coin-btc { right: auto !important; left: 13vw !important; }
+      .coin-eth { right: auto !important; left: 25vw !important; }
+      .arb-card { right: auto !important; left: 63vw !important; transform: scale(0.75); transform-origin: top left; }
+      .coin-4c { right: 50% !important; left: 50% !important; }
+      .arb-hero-title { font-size: 200px !important; }
+      #arb-arrow { width: 73px !important; height: 73px !important; top: -50px !important; right: -20px !important; }
+      #arb-reflection { width: 135% !important; top: 140px !important; left: -68px !important; }
+      .gap-section { justify-content: space-between !important; gap: 60px !important; }
+      .gap-right { max-width: 350px !important; flex-shrink: 0 !important; }
+      .gap-left { margin-left: -20px !important; }
+      .gap-left h2 { font-size: 82px !important; }
+      .gap-right h3 { font-size: 28px !important; line-height: 1.3 !important; }
+      .gap-right p { font-size: 14px !important; line-height: 1.5 !important; }
+      #fragmented-title1, #fragmented-title2 { font-size: 72px !important; }
+      #fragmented-desc { font-size: 18px !important; line-height: 1.5 !important; }
+      #fragmented-stats > div > div:first-child { font-size: 96px !important; }
+      #fragmented-stats > div > div:last-child { font-size: 18px !important; }
+      .features { padding: 40px 80px !important; margin-top: 0px !important; }
+      .features > div:first-child { align-items: center !important; margin-top: 80px !important; }
+      .tabs-nav { padding: 20px 24px !important; gap: 24px !important; }
+      .tab-btn { font-size: 14px !important; }
+      .feature-header { max-width: 850px !important; }
+      #feature-title { font-size: 26px !important; margin-bottom: 12px !important; }
+      #feature-desc { font-size: 14px !important; line-height: 1.2 !important; }
+      .tab-btn.active::after { bottom: -20px !important; }
+      .steps > div { margin-top: -10vw !important; }
+      .steps { padding-bottom: 80px !important; }
+      .steps .desk-only { width: 100% !important; margin: 0 auto !important; display: block !important; }
+      .steps .btn-waitlist { width: 200px !important; height: 50px !important; font-size: 10px !important; }
+      .footer-col h4 { font-size: 20px; }
+      .footer-col ul li a { font-size: 12px !important; line-height: 1.6 !important; }
+      .rewards .desk-only { padding: 0 !important; }
+      .rewards { padding: 60px 40px !important; }
+      #cta-banner-wrap { background-size: 100% 100% !important; margin: 0 140px 80px !important; min-height: 350px !important; overflow: hidden !important; }
+      footer > div { padding: 24px 52px 0px !important; }
+    }
+
     @media (max-width: 768px) {
       nav {
         padding: 0 24px 0 24px;
@@ -551,17 +658,19 @@
         max-width: 100%;
         box-sizing: border-box;
       }
+      .desk-gap-cover { display: none !important; }
       .mob-gradient { display: block; }
       .nav-logo { flex: 0 0 auto; transform: scale(0.75); transform-origin: left center; }
       .nav-links { display: none !important; }
       .nav-actions { display: none !important; }
       .mob-nav-icons { display: flex !important; align-items: center; gap: 8px; }
-      .hero { padding: 60px 20px 40px; min-height: 1030px; }
+      .hero { padding: 60px 20px 40px; min-height: 520px; }
       .hero-content { padding-top: -10px !important; }
       .hero h1 { font-size: clamp(32px, 7.5vw, 64px); white-space: normal; }
       .hero-sub { font-size: clamp(16px, 4.5vw, 32px); white-space: normal; }
       .hero-sub2 { font-size: 14px; color: #ffffff; }
       .hero-note { font-size: 16px; margin-top: 20px;}
+      .hero::after { background: linear-gradient(to bottom, transparent, rgba(1, 6, 25, 0.5)) !important; }
       .btn-waitlist { width: 100%; max-width: 260px; margin-top: -50px; }
       .float-labels, .float-label, .coin, .arb-card { display: none; }
       .mob-hero-images { display: block; }
@@ -589,7 +698,7 @@
       .steps-row::before { display: none; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
       .cta-banner { margin: 0 20px 60px; }
-      .fragmented { position: relative; margin-top: -40px;}
+      .fragmented { position: relative; margin-top: -40px; margin-bottom: -50px !important; }
       .fragmented::before { display: none !important; }
       .fragmented::after { display: none !important; }
       .gap-wrapper::after { display: none !important; }
@@ -625,14 +734,17 @@
       .partners-row { 
         flex-wrap: nowrap; 
         overflow-x: auto; 
-        padding: 20px 20px 20px; 
-        gap: 32px;
+        padding: 0px 20px 20px; 
+        gap: 12px;
         justify-content: flex-start;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
       }
       .partners-row::-webkit-scrollbar { display: none; }
       .partners-row img { height: auto !important; max-height: 40px; }
+      .partners-track { gap: 68px !important; padding: -100px 0 !important; }
+      .partners { padding: 20px 0 !important; }
+      .partners-track img { max-height: 60px !important; }
       .gap-section { border-radius: 30px !important; }
       .faq { padding: 60px 20px; }
       .faq-q { padding: 20px; font-size: 16px; }
@@ -689,7 +801,7 @@
 
 <!-- STICKY SIDEBAR -->
 <div class="sticky-side">
-  <div class="sticky-waitlist" onclick="document.querySelector('.email-form input').focus()">JOIN WAITLIST</div>
+  <div class="sticky-waitlist" onclick="var el = document.getElementById('arb-form-wrap'); var offset = window.innerWidth <= 1240 ? window.innerWidth * 0.6 : window.innerWidth * 0.4; var y = el.getBoundingClientRect().top + window.scrollY - offset; window.scrollTo({top: y, behavior: 'smooth'});">JOIN WAITLIST</div>
 </div>
 
 <!-- NAVBAR -->
@@ -795,17 +907,17 @@
   <a href="#" onclick="toggleMobMenu()" style="font-family:var(--font-display);font-size:24px;font-weight:400;color:rgba(255,255,255,0.5);text-decoration:none;text-transform:uppercase;display:flex;align-items:center;gap:8px;">PREDICT 'EM ALL <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M2 2L7 7L12 2" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/></svg></a>
   <a href="#" onclick="toggleMobMenu()" style="font-family:var(--font-display);font-size:24px;font-weight:400;color:rgba(255,255,255,0.5);text-decoration:none;text-transform:uppercase;display:flex;align-items:center;gap:8px;">DOCS <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M2 2L7 7L12 2" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/></svg></a>
   <a href="#" onclick="toggleMobMenu()" style="font-family:var(--font-display);font-size:24px;font-weight:400;color:rgba(255,255,255,0.5);text-decoration:none;text-transform:uppercase;">ABOUT</a>
-  <button class="btn-waitlist" onclick="toggleMobMenu();" style="width:80%;max-width:320px;height:56px;font-size:16px;margin-top:20px;">JOIN WAITLIST</button>
+  <button class="btn-waitlist" onclick="var el = document.getElementById('arb-form-wrap'); var offset = window.innerWidth <= 1240 ? window.innerWidth * 0.6 : window.innerWidth * 0.4; var y = el.getBoundingClientRect().top + window.scrollY - offset; window.scrollTo({top: y, behavior: 'smooth'});" style="width:80%;max-width:320px;height:56px;font-size:16px;margin-top:20px;">JOIN WAITLIST</button>
 </div>
 
 <!-- HERO -->
 <section class="hero">
+<div class="desk-gap-cover" style="position:absolute;top:0;left:0;right:0;height:450px;background:#010619;pointer-events:none;z-index:2;display:none;"></div>
   <canvas id="wave-canvas" style="display:none"></canvas>
   <video autoplay muted loop playsinline id="wave-video" style="position:absolute;top:110px;left:50%;transform:translateX(-50%);width:100%;height:auto;min-height:1080px;z-index:0;opacity:1;mix-blend-mode:lighten;pointer-events:none">
     <source src="wave.mp4" type="video/mp4">
   </video>
   <div style="position:absolute;inset:0;background:#010619;opacity:0.35;z-index:1;pointer-events:none;mix-blend-mode:multiply"></div>
-  <div class="mob-gradient" style="position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to bottom, #010619 0%, #010619 50%, transparent 100%);z-index:1;pointer-events:none;"></div>
 
   <div class="float-labels">
     <div class="float-label congress">US Congress<br>elections</div>
@@ -892,12 +1004,12 @@
     <h1><span class="accent">The Biggest</span> Prediction<br>Markets <span class="accent">Aggregator</span></h1>
     <p class="hero-sub">Trade on Polymarket, Kalshi, Opinion, Predict.fun & more</p>
     <p class="hero-sub2">Spot price gaps & arb opportunities instantly</p>
-    <button class="btn-waitlist" onclick="document.querySelector('.email-form input').focus()">JOIN WAITLIST</button>
+    <button class="btn-waitlist" onclick="var el = document.getElementById('arb-form-wrap'); var offset = window.innerWidth <= 1240 ? window.innerWidth * 0.6 : window.innerWidth * 0.4; var y = el.getBoundingClientRect().top + window.scrollY - offset; window.scrollTo({top: y, behavior: 'smooth'});">JOIN WAITLIST</button>
     <div class="hero-note">First 500 get 1 month <span class="premium">Premium FREE</span></div>
   </div>
-  <div class="mob-gradient" style="position:absolute;bottom:0;left:0;right:0;height:300px;background-image:url('backZ.png');background-size:cover;background-position:bottom center;z-index:1;pointer-events:none;"></div>
+  <!-- <div class="mob-gradient" style="position:absolute;bottom:0;left:0;right:0;height:300px;background-image:url('backZ.png');background-size:cover;background-position:bottom center;z-index:1;pointer-events:none;"></div> -->
 
-  <div class="mob-hero-images" style="position:absolute;inset:0;pointer-events:none;z-index:3;">
+  <!-- <div class="mob-hero-images" style="position:absolute;inset:0;pointer-events:none;z-index:3;">
   <img src="USCe.png" style="position:absolute;top:530px;left:35px;width:130px;">
   <img src="hype.png" style="position:absolute;top:515px;right:40px;width:70px;">
   <img src="sp500.png" style="position:absolute;top:620px;right:30px;width:95px;">
@@ -906,7 +1018,7 @@
   <img src="4Coin.png" style="position:absolute;top:680px;left:50%;transform:translateX(-50%);width:155px;">
   <img src="arbCard.png" style="position:absolute;top:855px;left:24px;right:14px;width:calc(100% - 28px);">
   <img src="backZ.png" style="position:absolute;top:550px;left:0;width:130%;z-index:-1;">
-  <img src="backZ.png" style="position:absolute;top:630px;left:0;width:130%;z-index:-1;">
+  <img src="backZ.png" style="position:absolute;top:630px;left:0;width:130%;z-index:-1;"> -->
 </div>
 </section>
 
@@ -917,13 +1029,22 @@
     <div class="partners-label">Connected to the largest</div>
     <div class="partners-line"></div>
   </div>
-  <div class="partners-row">
-    <img src="logo-polymarket.png" alt="Polymarket" style="height:52px;">
-    <img src="logo-kalshi.png" alt="Kalshi" style="height:32px;">
-    <img src="logo-jupiter.png" alt="Jupiter" style="height:75px;">
-    <img src="logo-limitless.png" alt="Limitless Labs" style="height:66px;">
-    <img src="logo-predictfun.png" alt="predict.fun" style="height:48px;">
-    <img src="logo-opinion.png" alt="Opinion" style="height:172px;">
+  <div class="partners-track-wrapper">
+    <div class="partners-track">
+      <img src="logo-polymarket.png" alt="Polymarket" style="height:52px;">
+      <img src="logo-kalshi.png" alt="Kalshi" style="height:32px;">
+      <img src="logo-jupiter.png" alt="Jupiter" style="height:75px;">
+      <img src="logo-limitless.png" alt="Limitless Labs" style="height:66px;">
+      <img src="logo-predictfun.png" alt="predict.fun" style="height:48px;">
+      <img src="logo-opinion.png" alt="Opinion" style="height:172px;">
+      <!-- дубликаты для бесконечного скролла -->
+      <img src="logo-polymarket.png" alt="Polymarket" style="height:52px;">
+      <img src="logo-kalshi.png" alt="Kalshi" style="height:32px;">
+      <img src="logo-jupiter.png" alt="Jupiter" style="height:75px;">
+      <img src="logo-limitless.png" alt="Limitless Labs" style="height:66px;">
+      <img src="logo-predictfun.png" alt="predict.fun" style="height:48px;">
+      <img src="logo-opinion.png" alt="Opinion" style="height:172px;">
+    </div>
   </div>
   <div class="partners-bottom-line"></div>
 </section>
@@ -1016,7 +1137,7 @@
       </div>
       <div class="tab-slide" data-tab="arb">
         <img src="arbEng.png" class="desk-only" style="width:100%;border-radius:16px;">
-        <img src="arbEngMob.png" class="mob-only" style="width:100%;display:block;border-radius:16px;">
+        <img src="arbEngMob.png" class="mob-only" style="width:100%;border-radius:16px;">
       </div>
       <div class="tab-slide" data-tab="terminal"><img src="predictionTerminal.png" style="width:100%;display:block;border-radius:16px;"></div>
       <div class="tab-slide" data-tab="portfolio"><div style="overflow:hidden;margin-right:-20px;"><img src="allPortfolio.png" style="width:100%;display:block;border-radius:16px;"></div></div>
@@ -1042,7 +1163,7 @@
 <section class="rewards">
   <h2 style="font-family: var(--font-display); font-size: 64px; font-weight: 500; line-height: 100%; text-align: center; color: #ffffff; margin-bottom: 24px;">Unlock Exclusive Rewards</h2>
   <p style="font-family: var(--font-display); font-size: 24px; font-weight: 400; line-height: 36px; text-align: center; color: rgba(255,255,255,0.66); margin-bottom: 48px;">Refer friends, subscribe early, get real perks.<br>Waitlist now — 1 month Premium free at launch.</p>
-  <img src="exclRewards.png" class="desk-only" alt="Exclusive Rewards" style="width: 100%; display: block; border-radius: 16px; padding: 0 60px; box-sizing: border-box;">
+  <img src="exclRewards.png" class="desk-only" alt="Exclusive Rewards" style="width: 100%; display: block; border-radius: 16px; box-sizing: border-box;">
   <div class="mob-only rewards-imgs" style="flex-direction:column;gap:16px;">
     <img src="rewardsRef.png" style="width:100%;border-radius:16px;">
     <img src="rewardsPremium.png" style="width:100%;border-radius:16px;">
@@ -1056,7 +1177,7 @@
   <img src="steps.png" class="desk-only" alt="Steps" style="width:100%;display:block;margin-bottom:40px;">
   <img src="stepsMob.png" class="mob-only" alt="Steps" style="width:100%;border-radius:16px;margin-bottom:24px;">
   <div style="display:flex;justify-content:center; margin-top:-250px;">
-    <button class="btn-waitlist" onclick="document.querySelector('.email-form input').focus()" style="width:417px;height:60px;font-size:18px;font-weight:600;letter-spacing:0;border-radius:14px;">
+    <button class="btn-waitlist" onclick="var el = document.getElementById('arb-form-wrap'); var offset = window.innerWidth <= 1240 ? window.innerWidth * 0.6 : window.innerWidth * 0.4; var y = el.getBoundingClientRect().top + window.scrollY - offset; window.scrollTo({top: y, behavior: 'smooth'});" style="width:417px;height:60px;font-size:18px;font-weight:600;letter-spacing:0;border-radius:14px;">
       JOIN WAITLIST & SECURE YOUR SPOT
     </button>
   </div>
@@ -1071,32 +1192,30 @@
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
     <div class="faq-q"><span>Why use 4casted instead of native platforms?</span><div class="faq-toggle">+</div></div>
-    <div class="faq-a">Native platforms only show their own markets. 4casted aggregates everything, so you can compare odds side by side, find arbitrage opportunities, and execute at the best price — all in one place.</div>
+    <div class="faq-a">Native platforms show only their own markets. 4casted shows overlapping markets across platforms in one view. You see price gaps, liquidity differences, and arbitrage as they form. Forget tab switching, blind spots, or multi-account mess. We also provide structured market intelligence and incentives, such as trading rebates, that native platforms don't offer.</div>
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
     <div class="faq-q"><span>What will I get with a premium subscription?</span><div class="faq-toggle">+</div></div>
-    <div class="faq-a">Premium gives you 2× more arbitrage alerts, priority access to new arb cases, Telegram notifications, and higher-tier insights. Waitlist members start with a free month.</div>
+    <div class="faq-a">4casted Premium gives you deeper visibility into how markets overlap and diverge across platforms. Instead of manually scanning markets, Premium users see significantly more matched markets, price discrepancies, and emerging arbitrage signals in real time.</div>
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
     <div class="faq-q"><span>Is this live data or delayed?</span><div class="faq-toggle">+</div></div>
-    <div class="faq-a">Data is fetched in near real-time from all connected platforms. Some platforms may have slight delays depending on their API, but we aim to surface opportunities as fast as possible.</div>
+    <div class="faq-a">Live. We ingest real-time price and liquidity updates via APIs and WebSocket streams. Refresh speed depends on the source platform, but updates are processed continuously to surface discrepancies as they happen.</div>
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
     <div class="faq-q"><span>What is Smart Routing, and when will it be available?</span><div class="faq-toggle">+</div></div>
-    <div class="faq-a">Smart Routing automatically routes your trade execution to the platform offering the best price for a given market. It's currently in development and will be available at launch.</div>
+    <div class="faq-a">Smart Routing is our execution layer. It will automatically route orders to the best venue based on price and liquidity. 4casted Smart Routing will roll out in a later phase once the execution infrastructure is fully deployed.</div>
   </div>
 </section>
 
-<div style="display:flex;justify-content:center;padding:0 0 80px;">
-  <button class="btn-waitlist" onclick="document.querySelector('.email-form input').focus()">JOIN WAITLIST</button>
-</div>
+
 
 <!-- CTA BANNER -->
 <div id="cta-banner-wrap" style="margin: 0 149px 80px; position: relative; border-radius: 25px; overflow: hidden; background-image: url('CTArect.png'); background-size: 100% 100%; background-repeat: no-repeat;">
   <div style="position: relative; z-index: 1; padding: 60px 40px; text-align: center;">
     <h2 id="cta-title" style="font-family: var(--font-display); font-size: 64px; font-weight: 500; line-height: 100%; color: #ffffff; margin-bottom: 16px;">Don't miss out on early access</h2>
     <p id="cta-desc" style="font-family: var(--font-display); font-size: 24px; font-weight: 500; line-height: 36px; color: #ffffff; margin-bottom: 32px;">Join waitlist now <span style="color: #8E4FED;">— 1 month Premium free at launch</span></p>
-    <button class="btn-waitlist" onclick="document.querySelector('.email-form input').focus()">JOIN WAITLIST</button>
+    <button class="btn-waitlist" onclick="var el = document.getElementById('arb-form-wrap'); var offset = window.innerWidth <= 1240 ? window.innerWidth * 0.6 : window.innerWidth * 0.4; var y = el.getBoundingClientRect().top + window.scrollY - offset; window.scrollTo({top: y, behavior: 'smooth'});">JOIN WAITLIST</button>
   </div>
 </div>
 
@@ -1106,7 +1225,12 @@
     <div class="footer-top">
       <div class="footer-col" id="fc-ecosystem">
         <h4>Ecosystem</h4><div class="footer-col-divider"></div>
-        <ul><li><a href="#">Prediction Terminal</a></li><li><a href="#">Smart Router</a></li><li><a href="#">Arbitrage Engine</a></li><li><a href="#">Portfolio</a></li><li><a href="#">How It Works</a></li></ul>
+        <ul>
+          <li><a href="#features" onclick="switchTab('router', document.querySelectorAll('.tab-btn')[0])">Smart Router</a></li>
+          <li><a href="#features" onclick="switchTab('arb', document.querySelectorAll('.tab-btn')[1])">Arbitrage Engine</a></li>
+          <li><a href="#features" onclick="switchTab('terminal', document.querySelectorAll('.tab-btn')[2])">Prediction Terminal</a></li>
+          <li><a href="#features" onclick="switchTab('portfolio', document.querySelectorAll('.tab-btn')[3])">Portfolio</a></li>
+        </ul>
       </div>
       <div class="footer-col" id="fc-platforms">
         <h4>Platforms</h4><div class="footer-col-divider"></div>
@@ -1124,9 +1248,7 @@
         <h4>Our social networks</h4><div class="footer-col-divider"></div>
         <div style="display:flex;flex-direction:row;gap:10px;margin-top:8px;">
           <a href="#" class="soc-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="20" fill="black" fill-opacity="0.07"/><path d="M11.0439 12L17.9935 21.3765L11 29H12.574L18.6967 22.3255L23.6438 29H29L21.6594 19.0961L28.1689 12H26.5949L20.9561 18.1471L16.4001 12H11.0439ZM13.3585 13.1699H15.8192L26.685 27.8299H24.2244L13.3585 13.1699Z" fill="black"/></svg></a>
-          <a href="#" class="soc-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="20" fill="black" fill-opacity="0.07"/><path d="M28 12.6022L24.9946 28.2923C24.9946 28.2923 24.5741 29.3801 23.4189 28.8584L16.4846 23.3526L16.4524 23.3364C17.3891 22.4654 24.6524 15.7027 24.9698 15.3961C25.4613 14.9214 25.1562 14.6387 24.5856 14.9974L13.8568 22.053L9.71764 20.6108C9.71764 20.6108 9.06626 20.3708 9.00359 19.8491C8.9401 19.3265 9.73908 19.0439 9.73908 19.0439L26.6131 12.1889C26.6131 12.1889 28 11.5579 28 12.6022Z" fill="black"/></svg></a>
           <a href="#" class="soc-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="20" fill="black" fill-opacity="0.07"/><path d="M28 20.7444V26.2601H24.7713V21.0807C24.7713 19.8027 24.3004 18.9283 23.157 18.9283C22.2825 18.9283 21.7444 19.5336 21.5426 20.0718C21.4753 20.2735 21.4081 20.5426 21.4081 20.8789V26.2601H18.1794C18.1794 26.2601 18.2466 17.5157 18.1794 16.6413H21.4081V17.9865C21.8117 17.3139 22.6188 16.3722 24.3004 16.3722C26.3856 16.3722 28 17.7848 28 20.7444ZM14.8161 12C13.7399 12 13 12.7399 13 13.6816C13 14.6233 13.6726 15.3632 14.7489 15.3632C15.8924 15.3632 16.565 14.6233 16.565 13.6816C16.6323 12.6726 15.9596 12 14.8161 12ZM13.2018 26.2601H16.4305V16.6413H13.2018V26.2601Z" fill="black"/></svg></a>
-          <a href="#" class="soc-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="20" fill="black" fill-opacity="0.07"/><path d="M21.6571 20.3648H25.3793L25.9637 16.5605H21.6563V14.4813C21.6563 12.901 22.1696 11.4996 23.6389 11.4996H26V8.17974C25.5852 8.12338 24.7078 8 23.05 8C19.5882 8 17.5587 9.8393 17.5587 14.0297V16.5605H14V20.3648H17.5587V30.821C18.2634 30.9276 18.9773 31 19.7101 31C20.3724 31 21.0189 30.9391 21.6571 30.8522V20.3648Z" fill="black"/></svg></a>
         </div>
       </div>
     </div>
@@ -1148,6 +1270,127 @@
 </footer>
 
 <script>
+  // ─── HERO ANIMATION ───
+  function heroAnimation() {
+    if (window.innerWidth <= 1240) return;
+    const coin4c = document.querySelector('.coin-4c');
+    const arbCard = document.querySelector('.arb-card');
+    if (!coin4c || !arbCard) return;
+
+    const coin4cRect = coin4c.getBoundingClientRect();
+    const cx = coin4cRect.left + coin4cRect.width / 2;
+    const cy = coin4cRect.top + coin4cRect.height / 2;
+
+    const arbRect = arbCard.getBoundingClientRect();
+    const ax = arbRect.left + arbRect.width / 2;
+    const ay = arbRect.top + arbRect.height / 2;
+
+    const elements = [
+      document.querySelector('.float-label.congress'),
+      document.querySelector('.coin-btc'),
+      document.querySelector('.float-label.sp'),
+      document.querySelector('.coin-eth'),
+      document.querySelector('.float-label.hype'),
+    ].filter(Boolean);
+
+    elements.forEach((el, i) => {
+      el.style.opacity = '0';
+      setTimeout(() => {
+        el.animate([
+          { opacity: 0 },
+          { opacity: 1 }
+        ], { duration: 800, easing: 'ease', fill: 'forwards' });
+      }, i * 200);
+    });
+
+    const allLeft = document.querySelectorAll('.arb-card-left > *');
+    const leftRows = Array.from(allLeft).filter(el =>
+      el.classList.contains('arb-data-row') ||
+      el.classList.contains('arb-section-label') ||
+      el.classList.contains('arb-divider')
+    );
+    const rightPart = document.querySelector('.arb-card-right');
+
+    leftRows.forEach(r => { r.style.opacity = '0'; });
+    if (rightPart) rightPart.style.opacity = '0';
+
+    let elIndex = 0;
+
+    function revealNext(index) {
+      const rowsPerEl = Math.ceil(leftRows.length / elements.length);
+      const start = index * rowsPerEl;
+      const end = Math.min(start + rowsPerEl, leftRows.length);
+      for (let i = start; i < end; i++) {
+        const row = leftRows[i];
+        if (!row) continue;
+        setTimeout(() => {
+          row.animate([
+            { opacity: 0, transform: 'translateX(-10px)' },
+            { opacity: 1, transform: 'translateX(0)' }
+          ], { duration: 400, easing: 'ease', fill: 'forwards' });
+        }, (i - start) * 150);
+      }
+      if (index === elements.length - 1 && rightPart) {
+        setTimeout(() => {
+          rightPart.animate([
+            { opacity: 0, transform: 'translateX(10px)' },
+            { opacity: 1, transform: 'translateX(0)' }
+          ], { duration: 400, easing: 'ease', fill: 'forwards' });
+        }, 300);
+      }
+    }
+
+    function animateElement() {
+      if (elIndex >= elements.length) return; // только один раз, без перезапуска
+
+      const el = elements[elIndex];
+      const rect = el.getBoundingClientRect();
+      const ex = rect.left + rect.width / 2;
+      const ey = rect.top + rect.height / 2;
+
+      const tx = cx - ex;
+      const ty = cy - ey;
+      const ax2 = ax - ex;
+      const ay2 = ay - ey;
+
+      const orbitR = 40;
+      const startAngle = Math.random() * Math.PI * 2;
+      const r = () => (Math.random() - 0.5) * 70;
+
+      const keyframes = [
+        { transform: `translate(0px, 0px) scale(1)`, opacity: 1 },
+        { transform: `translate(${tx*0.25 + r()}px, ${ty*0.25 + r()}px) scale(0.88)`, opacity: 1 },
+        { transform: `translate(${tx*0.5 + r()}px, ${ty*0.5 + r()}px) scale(0.75)`, opacity: 0.9 },
+        { transform: `translate(${tx*0.75 + r()*0.4}px, ${ty*0.75 + r()*0.4}px) scale(0.6)`, opacity: 0.8 },
+        { transform: `translate(${tx + Math.cos(startAngle)*orbitR}px, ${ty + Math.sin(startAngle)*orbitR}px) scale(0.45)`, opacity: 0.75 },
+        { transform: `translate(${tx + Math.cos(startAngle + Math.PI*0.4)*orbitR}px, ${ty + Math.sin(startAngle + Math.PI*0.4)*orbitR}px) scale(0.43)`, opacity: 0.72 },
+        { transform: `translate(${tx + Math.cos(startAngle + Math.PI*0.8)*orbitR}px, ${ty + Math.sin(startAngle + Math.PI*0.8)*orbitR}px) scale(0.41)`, opacity: 0.68 },
+        { transform: `translate(${tx + Math.cos(startAngle + Math.PI*1.2)*orbitR}px, ${ty + Math.sin(startAngle + Math.PI*1.2)*orbitR}px) scale(0.38)`, opacity: 0.62 },
+        { transform: `translate(${tx + Math.cos(startAngle + Math.PI*1.6)*orbitR}px, ${ty + Math.sin(startAngle + Math.PI*1.6)*orbitR}px) scale(0.35)`, opacity: 0.56 },
+        { transform: `translate(${tx + Math.cos(startAngle + Math.PI*2.0)*orbitR}px, ${ty + Math.sin(startAngle + Math.PI*2.0)*orbitR}px) scale(0.32)`, opacity: 0.5 },
+        { transform: `translate(${ax2*0.6}px, ${ay2*0.6}px) scale(0.2)`, opacity: 0.35 },
+        { transform: `translate(${ax2*0.85}px, ${ay2*0.85}px) scale(0.1)`, opacity: 0.15 },
+        { transform: `translate(${ax2}px, ${ay2}px) scale(0)`, opacity: 0 },
+      ];
+
+      const anim = el.animate(keyframes, {
+        duration: 3500,
+        easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+        fill: 'forwards'
+      });
+
+      anim.onfinish = () => { el.style.opacity = '0'; };
+
+      const currentIndex = elIndex;
+      setTimeout(() => { revealNext(currentIndex); }, 3500 * 0.55);
+      setTimeout(() => { elIndex++; animateElement(); }, 3500 * 0.20);
+    }
+
+    animateElement();
+  }
+
+  window.addEventListener('load', () => setTimeout(heroAnimation, 100));
+
   // ─── WAVE CANVAS ───
   const canvas = document.getElementById('wave-canvas');
   const ctx = canvas.getContext('2d');
@@ -1176,6 +1419,16 @@
     requestAnimationFrame(drawWave);
   }
   drawWave();
+
+  // ─── PARTNERS ───
+  const wrapper = document.querySelector('.partners-track-wrapper');
+  if (wrapper) {
+    wrapper.addEventListener('scroll', () => {
+      if (wrapper.scrollLeft >= wrapper.scrollWidth / 2) {
+        wrapper.scrollLeft = 0;
+      }
+    });
+  }
 
   // ─── TABS ───
   const tabOrder = ['router', 'arb', 'terminal', 'portfolio'];
@@ -1208,6 +1461,21 @@
     const btn = document.querySelectorAll('.tab-btn')[currentTab];
     switchTab(id, btn);
   }
+
+  let autoTabInterval = setInterval(() => {
+    currentTab = (currentTab + 1) % 4;
+    const id = tabOrder[currentTab];
+    const btn = document.querySelectorAll('.tab-btn')[currentTab];
+    switchTab(id, btn);
+  }, 5000);
+
+  clearInterval(autoTabInterval);
+  autoTabInterval = setInterval(() => {
+    currentTab = (currentTab + 1) % 4;
+    const id = tabOrder[currentTab];
+    const btn = document.querySelectorAll('.tab-btn')[currentTab];
+    switchTab(id, btn);
+  }, 10000);
 
   // ─── FAQ ───
   function toggleFaq(item) {
