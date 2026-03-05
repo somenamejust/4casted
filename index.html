@@ -3,10 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="4casted — prediction markets aggregator. Smart routing, arbitrage engine and portfolio tracking across all major platforms.">
+  <meta property="og:title" content="4casted">
+  <meta property="og:description" content="prediction markets aggregator. Smart routing, arbitrage engine and portfolio tracking across all major platforms.">
+  <meta property="og:url" content="https://4casted.com">
   <title>4casted — The Biggest Prediction Markets Aggregator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 44'><defs><linearGradient id='g' x1='7.97' y1='46.48' x2='85.77' y2='-14.55' gradientUnits='userSpaceOnUse'><stop stop-color='%239F84EE'/><stop offset='1' stop-color='%23E68AFF'/></linearGradient></defs><path d='M48.0023 0L37.2759 43.0531H35.7759L28.9253 43.0457L28.2759 43.0531L30.2922 36.2026H0L36.1714 0H48.0023ZM17.5536 28.9273H32.1418L37.1199 9.34363L17.5536 28.9273Z' fill='url(%23g)'/></svg>">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -90,15 +95,30 @@
     }
     .nav-item.active a { color: #C084FC; }
     .nav-item a:hover { color: #fff; }
-    .nav-underline {
+    .nav-item .nav-underline { display: none; }
+    .nav-item.active .nav-underline { display: none; }
+    .nav-item.active a::after {
+      content: '';
       position: absolute;
-      bottom: -65px;
-      left: 50%;
-      transform: translateX(-55%);
+      bottom: -45px;
+      left: -5px;
+      right: -10px;
+      width: auto;
+      height: 3px;
+      background: #C084FC;
+      box-shadow: 0 4px 10px rgba(192, 132, 252, 0.8);
+      border-radius: 2px;
+    }
+    .nav-item a {
+      position: relative;
     }
     .nav-links a:hover { color: #fff; }
     .nav-links .has-arrow::after { content: ''; }
     .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .nav-item svg path { stroke: rgba(255,255,255,0.36) !important; }
+    .nav-item.active svg path { stroke: #C084FC !important; }
+    .nav-item.active a { color: #C084FC; }
+    .nav-item a:hover { color: #fff; }
     .btn-ghost {
       background: none;
       border: none;
@@ -565,7 +585,8 @@
 
     /* ─── RESPONSIVE ─── */
 
-    @media (min-width: 1025px) and (max-width: 1920px) {
+    @media (min-width: 1025px) and (max-width: 2559px) {
+      nav { padding: 0 6vw; }
       .hero { min-height: 1000px !important; max-height: 1000px !important; }
       .desk-gap-cover { display: block !important; }
       .hero-sub { font-size: 36px; font-weight: 700; }
@@ -598,7 +619,7 @@
       .steps { padding-bottom: 80px !important; }
     }
 
-    @media (min-width: 769px) and (max-width: 1240px) {
+    @media (min-width: 769px) and (max-width: 1024px) {
       nav { padding: 0 24px; }
       .nav-links { display: none !important; }
       .nav-actions { display: none !important; }
@@ -837,39 +858,57 @@
   </a>
 
   <div class="nav-links">
-    <div class="nav-item active">
-      <a href="#features">SOLUTIONS</a>
-      <svg width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#filter0_d_130_68)"><path d="M4.35352 3.35355L9.35352 8.35355L14.3535 3.35355" stroke="#C084FC"/></g><defs><filter id="filter0_d_130_68" x="0" y="0" width="18.707" height="14.0606" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dy="1"/><feGaussianBlur stdDeviation="2"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix type="matrix" values="0 0 0 0 0.752941 0 0 0 0 0.517647 0 0 0 0 0.988235 0 0 0 1 0"/><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_130_68"/><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_130_68" result="shape"/></filter></defs></svg>
+    <div class="nav-item" onclick="setActiveNav(0)">
+      <a href="#features" onclick="setTimeout(()=>switchTab('router', document.querySelectorAll('.tab-btn')[0]), 100)">SOLUTIONS</a>
+      <svg width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.35352 3.35355L9.35352 8.35355L14.3535 3.35355" stroke="rgba(255,255,255,0.36)"/>
+      </svg>
       <div class="nav-underline">
         <svg width="130" height="24" viewBox="0 0 130 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#filter0_d_130_107)"><rect x="10.2998" y="6.29999" width="109" height="3" fill="#C084FC"/></g><defs><filter id="filter0_d_130_107" x="-0.000195503" y="-1.23978e-05" width="129.6" height="23.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dy="4"/><feGaussianBlur stdDeviation="5.15"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix type="matrix" values="0 0 0 0 0.752941 0 0 0 0 0.517647 0 0 0 0 0.988235 0 0 0 1 0"/><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_130_107"/><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_130_107" result="shape"/></filter></defs></svg>
       </div>
     </div>
-    <div class="nav-item">
-      <a href="#">ARBITRAGE</a>
-      <svg width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#arrow2)"><path d="M4.35352 3.35355L9.35352 8.35355L14.3535 3.35355" stroke="rgba(255,255,255,0.36)"/></g><defs><filter id="arrow2" x="0" y="0" width="18.707" height="14.0606" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/></filter></defs></svg>
+    <div class="nav-item" onclick="setActiveNav(1)">
+      <a href="#features" onclick="setTimeout(()=>switchTab('arb', document.querySelectorAll('.tab-btn')[1]), 100)">ARBITRAGE</a>
+      <svg width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.35352 3.35355L9.35352 8.35355L14.3535 3.35355" stroke="rgba(255,255,255,0.36)"/>
+      </svg>
+      <div class="nav-underline">
+        <svg width="130" height="24" viewBox="0 0 130 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#nav-ul-2)"><rect x="10.2998" y="6.29999" width="109" height="3" fill="#C084FC"/></g><defs><filter id="nav-ul-2" x="-0.000195503" y="-1.23978e-05" width="129.6" height="23.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dy="4"/><feGaussianBlur stdDeviation="5.15"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix type="matrix" values="0 0 0 0 0.752941 0 0 0 0 0.517647 0 0 0 0 0.988235 0 0 0 1 0"/><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_130_107"/><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_130_107" result="shape"/></filter></defs></svg>
+      </div>
     </div>
-    <div class="nav-item">
-      <a href="#">TRADING REWARDS</a>
-      <svg width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#arrow3)"><path d="M4.35352 3.35355L9.35352 8.35355L14.3535 3.35355" stroke="rgba(255,255,255,0.36)"/></g><defs><filter id="arrow3" x="0" y="0" width="18.707" height="14.0606" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/></filter></defs></svg>
+    <div class="nav-item" onclick="setActiveNav(2)">
+      <a href="#rewards">TRADING REWARDS</a>
+      <svg width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.35352 3.35355L9.35352 8.35355L14.3535 3.35355" stroke="rgba(255,255,255,0.36)"/>
+      </svg>
+      <div class="nav-underline">
+        <svg width="130" height="24" viewBox="0 0 130 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#nav-ul-3)"><rect x="10.2998" y="6.29999" width="109" height="3" fill="#C084FC"/></g><defs><filter id="nav-ul-3" x="-0.000195503" y="-1.23978e-05" width="129.6" height="23.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dy="4"/><feGaussianBlur stdDeviation="5.15"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix type="matrix" values="0 0 0 0 0.752941 0 0 0 0 0.517647 0 0 0 0 0.988235 0 0 0 1 0"/><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_130_107"/><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_130_107" result="shape"/></filter></defs></svg>
+      </div>
     </div>
-    <div class="nav-item">
-      <a href="#">FAQ</a>
+    <div class="nav-item" onclick="setActiveNav(3)">
+      <a href="#faq">FAQ</a>
+      <svg width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.35352 3.35355L9.35352 8.35355L14.3535 3.35355" stroke="rgba(255,255,255,0.36)"/>
+      </svg>
+      <div class="nav-underline">
+        <svg width="130" height="24" viewBox="0 0 130 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#nav-ul-4)"><rect x="10.2998" y="6.29999" width="109" height="3" fill="#C084FC"/></g><defs><filter id="nav-ul-4" x="-0.000195503" y="-1.23978e-05" width="129.6" height="23.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dy="4"/><feGaussianBlur stdDeviation="5.15"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix type="matrix" values="0 0 0 0 0.752941 0 0 0 0 0.517647 0 0 0 0 0.988235 0 0 0 1 0"/><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_130_107"/><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_130_107" result="shape"/></filter></defs></svg>
+      </div>
     </div>
   </div>
 
-  <div class="nav-actions">
+  <!-- <div class="nav-actions">
     <button class="btn-ghost">Login</button>
     <button class="btn-primary" onclick="document.querySelector('.email-form input').focus()">Sign up</button>
-  </div>
+  </div> -->
 
   <!-- Мобильные иконки — только на мобайле -->
   <div class="mob-nav-icons" id="mob-nav-icons">
-    <button style="width:49px;height:49px;border-radius:12px;background:#1F213F;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+    <!-- <button style="width:49px;height:49px;border-radius:12px;background:#1F213F;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;">
       <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12.9997 13.8125C9.56551 13.8125 6.77051 11.0175 6.77051 7.58332C6.77051 4.14916 9.56551 1.35416 12.9997 1.35416C16.4338 1.35416 19.2288 4.14916 19.2288 7.58332C19.2288 11.0175 16.4338 13.8125 12.9997 13.8125ZM12.9997 2.97916C10.4647 2.97916 8.39551 5.04832 8.39551 7.58332C8.39551 10.1183 10.4647 12.1875 12.9997 12.1875C15.5347 12.1875 17.6038 10.1183 17.6038 7.58332C17.6038 5.04832 15.5347 2.97916 12.9997 2.97916Z" fill="white" fill-opacity="0.36"/>
         <path d="M22.3059 24.6458C21.8618 24.6458 21.4934 24.2775 21.4934 23.8333C21.4934 20.0958 17.6802 17.0625 13.0002 17.0625C8.32016 17.0625 4.50684 20.0958 4.50684 23.8333C4.50684 24.2775 4.1385 24.6458 3.69434 24.6458C3.25017 24.6458 2.88184 24.2775 2.88184 23.8333C2.88184 19.2075 7.42099 15.4375 13.0002 15.4375C18.5794 15.4375 23.1184 19.2075 23.1184 23.8333C23.1184 24.6458 22.7501 24.6458 22.3059 24.6458Z" fill="white" fill-opacity="0.36"/>
       </svg>
-    </button>
+    </button> -->
     <button onclick="toggleMobMenu()" style="width:49px;height:49px;border-radius:12px;background:#1F213F;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;">
       <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="3" rx="1.5" fill="#A755F7"/>
@@ -903,10 +942,10 @@
       </svg>
     </button>
   </div>
-  <a href="#features" onclick="toggleMobMenu()" style="font-family:var(--font-display);font-size:24px;font-weight:400;color:#C084FC;text-decoration:none;text-transform:uppercase;display:flex;align-items:center;gap:8px;">SOLUTIONS <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M2 2L7 7L12 2" stroke="#C084FC" stroke-width="1.5"/></svg></a>
-  <a href="#" onclick="toggleMobMenu()" style="font-family:var(--font-display);font-size:24px;font-weight:400;color:rgba(255,255,255,0.5);text-decoration:none;text-transform:uppercase;display:flex;align-items:center;gap:8px;">PREDICT 'EM ALL <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M2 2L7 7L12 2" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/></svg></a>
-  <a href="#" onclick="toggleMobMenu()" style="font-family:var(--font-display);font-size:24px;font-weight:400;color:rgba(255,255,255,0.5);text-decoration:none;text-transform:uppercase;display:flex;align-items:center;gap:8px;">DOCS <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M2 2L7 7L12 2" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/></svg></a>
-  <a href="#" onclick="toggleMobMenu()" style="font-family:var(--font-display);font-size:24px;font-weight:400;color:rgba(255,255,255,0.5);text-decoration:none;text-transform:uppercase;">ABOUT</a>
+  <a href="#features" onclick="toggleMobMenu(); setTimeout(()=>switchTab('router', document.querySelectorAll('.tab-btn')[0]), 300)" style="font-family:var(--font-display);font-size:24px;font-weight:400;color:#C084FC;text-decoration:none;text-transform:uppercase;display:flex;align-items:center;gap:8px;">SOLUTIONS <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M2 2L7 7L12 2" stroke="#C084FC" stroke-width="1.5"/></svg></a>
+  <a href="#features" onclick="toggleMobMenu(); setTimeout(()=>{ document.getElementById('features').scrollIntoView({behavior:'smooth'}); const btn = document.querySelectorAll('.tab-btn')[1]; switchTab('arb', btn); }, 400)" style="font-family:var(--font-display);font-size:24px;font-weight:400;color:rgba(255,255,255,0.5);text-decoration:none;text-transform:uppercase;display:flex;align-items:center;gap:8px;">ARBITRAGE<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M2 2L7 7L12 2" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/></svg></a>
+  <a href="#rewards" onclick="toggleMobMenu()" style="font-family:var(--font-display);font-size:24px;font-weight:400;color:rgba(255,255,255,0.5);text-decoration:none;text-transform:uppercase;display:flex;align-items:center;gap:8px;">TRADING REWARDS<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M2 2L7 7L12 2" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/></svg></a>
+  <a href="#faq" onclick="toggleMobMenu()" style="font-family:var(--font-display);font-size:24px;font-weight:400;color:rgba(255,255,255,0.5);text-decoration:none;text-transform:uppercase;">FAQ</a>
   <button class="btn-waitlist" onclick="var el = document.getElementById('arb-form-wrap'); var offset = window.innerWidth <= 1240 ? window.innerWidth * 0.6 : window.innerWidth * 0.4; var y = el.getBoundingClientRect().top + window.scrollY - offset; window.scrollTo({top: y, behavior: 'smooth'});" style="width:80%;max-width:320px;height:56px;font-size:16px;margin-top:20px;">JOIN WAITLIST</button>
 </div>
 
@@ -1061,14 +1100,14 @@
   <div id="arb-form-wrap" style="background: #9F84EE2E; border-radius: 25px; width: 900px; max-width: 100%; margin: 0 auto; padding: 48px 44px 26px;">
     <div id="arb-form-row" style="display: flex; gap: 12px; align-items: center; margin-bottom: 24px;">
       <div style="background: #000D25; border-radius: 10px; backdrop-filter: blur(14.1px); padding: 0 20px; height: 60px; display: flex; align-items: center; flex: 1;">
-        <input type="email" placeholder="your@email.com" class="email-form" style="background: none; border: none; outline: none; font-size: 18px; font-weight: 300; font-style: italic; color: rgba(255,255,255,0.5); width: 100%;"/>
+        <input id="waitlist-email" type="email" placeholder="your@email.com" class="email-form" style="background: none; border: none; outline: none; font-size: 18px; font-weight: 300; font-style: italic; color: rgba(255,255,255,0.5); width: 100%;"/>
       </div>
-      <button class="btn-waitlist" style="display: flex; align-items: center; gap: 8px; margin-bottom: 0; white-space: nowrap; width: auto; padding: 0 32px; height: 60px;">
+      <button id="waitlist-btn" class="btn-waitlist" onclick="submitWaitlist()" style="display: flex; align-items: center; gap: 8px; margin-bottom: 0; white-space: nowrap; width: auto; padding: 0 32px; height: 60px;">
         <img src="shield.png" alt="" style="height: 18px;">
         JOIN WAITLIST
       </button>
     </div>
-    <div style="font-size: 24px; font-weight: 400; color: #FFF8F8; text-align: center; line-height: 52px;">347+ already joined — spots filling fast</div>
+    <div id="waitlist-msg" style="font-size: 24px; font-weight: 400; color: #FFF8F8; text-align: center; line-height: 52px;">347+ already joined — spots filling fast</div>
   </div>
 </section>
 
@@ -1160,7 +1199,7 @@
 </section>
 
 <!-- REWARDS -->
-<section class="rewards">
+<section class="rewards" id="rewards">
   <h2 style="font-family: var(--font-display); font-size: 64px; font-weight: 500; line-height: 100%; text-align: center; color: #ffffff; margin-bottom: 24px;">Unlock Exclusive Rewards</h2>
   <p style="font-family: var(--font-display); font-size: 24px; font-weight: 400; line-height: 36px; text-align: center; color: rgba(255,255,255,0.66); margin-bottom: 48px;">Refer friends, subscribe early, get real perks.<br>Waitlist now — 1 month Premium free at launch.</p>
   <img src="exclRewards.png" class="desk-only" alt="Exclusive Rewards" style="width: 100%; display: block; border-radius: 16px; box-sizing: border-box;">
@@ -1184,7 +1223,7 @@
 </section>
 
 <!-- FAQ -->
-<section class="faq">
+<section class="faq" id="faq">
   <h2 style="font-family: var(--font-display); font-size: 64px; font-weight: 500; line-height: 100%; text-align: center; color: #ffffff; margin-bottom: 60px;">FAQ</h2>
   <div class="faq-item open" onclick="toggleFaq(this)">
     <div class="faq-q"><span>What is 4casted?</span><div class="faq-toggle">−</div></div>
@@ -1247,8 +1286,9 @@
       <div class="footer-col">
         <h4>Our social networks</h4><div class="footer-col-divider"></div>
         <div style="display:flex;flex-direction:row;gap:10px;margin-top:8px;">
-          <a href="#" class="soc-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="20" fill="black" fill-opacity="0.07"/><path d="M11.0439 12L17.9935 21.3765L11 29H12.574L18.6967 22.3255L23.6438 29H29L21.6594 19.0961L28.1689 12H26.5949L20.9561 18.1471L16.4001 12H11.0439ZM13.3585 13.1699H15.8192L26.685 27.8299H24.2244L13.3585 13.1699Z" fill="black"/></svg></a>
+          <a href="https://x.com/4castd" target="_blank" class="soc-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="20" fill="black" fill-opacity="0.07"/><path d="M11.0439 12L17.9935 21.3765L11 29H12.574L18.6967 22.3255L23.6438 29H29L21.6594 19.0961L28.1689 12H26.5949L20.9561 18.1471L16.4001 12H11.0439ZM13.3585 13.1699H15.8192L26.685 27.8299H24.2244L13.3585 13.1699Z" fill="black"/></svg></a>
           <a href="#" class="soc-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="20" fill="black" fill-opacity="0.07"/><path d="M28 20.7444V26.2601H24.7713V21.0807C24.7713 19.8027 24.3004 18.9283 23.157 18.9283C22.2825 18.9283 21.7444 19.5336 21.5426 20.0718C21.4753 20.2735 21.4081 20.5426 21.4081 20.8789V26.2601H18.1794C18.1794 26.2601 18.2466 17.5157 18.1794 16.6413H21.4081V17.9865C21.8117 17.3139 22.6188 16.3722 24.3004 16.3722C26.3856 16.3722 28 17.7848 28 20.7444ZM14.8161 12C13.7399 12 13 12.7399 13 13.6816C13 14.6233 13.6726 15.3632 14.7489 15.3632C15.8924 15.3632 16.565 14.6233 16.565 13.6816C16.6323 12.6726 15.9596 12 14.8161 12ZM13.2018 26.2601H16.4305V16.6413H13.2018V26.2601Z" fill="black"/></svg></a>
+          <a href="mailto:info@4casted.com" class="soc-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="20" fill="black" fill-opacity="0.07"/><path d="M12 14C11.4477 14 11 14.4477 11 15V25C11 25.5523 11.4477 26 12 26H28C28.5523 26 29 25.5523 29 25V15C29 14.4477 28.5523 14 28 14H12ZM13.5 16H26.5L20 20.75L13.5 16ZM13 17.5L20 22.5L27 17.5V24H13V17.5Z" fill="black"/></svg></a>
         </div>
       </div>
     </div>
@@ -1270,6 +1310,17 @@
 </footer>
 
 <script>
+  // ─── NAV ───
+  function setActiveNav(index) {
+    document.querySelectorAll('.nav-item').forEach((item, i) => {
+      item.classList.toggle('active', i === index);
+      const svg = item.querySelector('svg:first-of-type');
+      if (svg) {
+        svg.style.filter = (i === index) ? 'drop-shadow(0 1px 4px rgba(192,132,252,0.8))' : 'none';
+      }
+    });
+  }
+
   // ─── HERO ANIMATION ───
   function heroAnimation() {
     if (window.innerWidth <= 1240) return;
@@ -1342,6 +1393,14 @@
 
     function animateElement() {
       if (elIndex >= elements.length) return; // только один раз, без перезапуска
+
+      // Пересчитываем координаты при каждом запуске
+      const coin4cRect = coin4c.getBoundingClientRect();
+      const cx = coin4cRect.left + coin4cRect.width / 2;
+      const cy = coin4cRect.top + coin4cRect.height / 2;
+      const arbRect = arbCard.getBoundingClientRect();
+      const ax = arbRect.left + arbRect.width / 2;
+      const ay = arbRect.top + arbRect.height / 2;
 
       const el = elements[elIndex];
       const rect = el.getBoundingClientRect();
@@ -1498,29 +1557,64 @@
     const menu = document.getElementById('mob-menu');
     menu.classList.toggle('is-open');
     document.body.style.overflow = menu.classList.contains('is-open') ? 'hidden' : '';
-    const features = document.getElementById('features');
-    features.className = 'features tab-' + id;
   }
 
   // ─── FOOTER ───
   if (window.innerWidth <= 768) {
-  ['fc-ecosystem','fc-platforms','fc-docs','fc-company'].forEach(id => {
-    const col = document.getElementById(id);
-    const h4 = col.querySelector('h4');
-    const ul = col.querySelector('ul');
-    ul.style.display = 'none';
-    h4.style.cursor = 'pointer';
-    h4.style.display = 'flex';
-    h4.style.justifyContent = 'space-between';
-    h4.style.alignItems = 'center';
-    h4.innerHTML += '<svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.353516 0.353516L7.35352 7.35352L14.3535 0.353516" stroke="black"/></svg>';
-    h4.addEventListener('click', () => {
-      const open = ul.style.display === 'block';
-      ul.style.display = open ? 'none' : 'block';
-      h4.querySelector('svg').style.transform = open ? '' : 'scaleY(-1)';
+    ['fc-ecosystem','fc-platforms','fc-docs','fc-company'].forEach(id => {
+      const col = document.getElementById(id);
+      const h4 = col.querySelector('h4');
+      const ul = col.querySelector('ul');
+      ul.style.display = 'none';
+      h4.style.cursor = 'pointer';
+      h4.style.display = 'flex';
+      h4.style.justifyContent = 'space-between';
+      h4.style.alignItems = 'center';
+      h4.innerHTML += '<svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.353516 0.353516L7.35352 7.35352L14.3535 0.353516" stroke="black"/></svg>';
+      h4.addEventListener('click', () => {
+        const open = ul.style.display === 'block';
+        ul.style.display = open ? 'none' : 'block';
+        h4.querySelector('svg').style.transform = open ? '' : 'scaleY(-1)';
+      });
     });
-  });
-}
+  }
+
+  // ─── SUBMIT WAITLIST ───
+  async function submitWaitlist() {
+    const input = document.getElementById('waitlist-email');
+    const btn = document.getElementById('waitlist-btn');
+    const msg = document.getElementById('waitlist-msg');
+    const email = input.value.trim();
+
+    if (!email || !email.includes('@')) {
+      input.style.color = '#ff6b6b';
+      input.placeholder = 'Enter a valid email';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<img src="shield.png" style="height:18px"> SENDING...';
+
+    try {
+      const res = await fetch('https://formspree.io/f/xpqyalzg', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+
+      if (res.ok) {
+        input.value = '';
+        btn.innerHTML = '<img src="shield.png" style="height:18px"> ✓ JOINED!';
+        msg.textContent = '348+ already joined — spots filling fast';
+      } else {
+        btn.innerHTML = 'TRY AGAIN';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.innerHTML = 'TRY AGAIN';
+      btn.disabled = false;
+    }
+  }
 </script>
 </body>
 </html>
